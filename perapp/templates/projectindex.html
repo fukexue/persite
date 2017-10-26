@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目</title>
+    <link href="{% static 'css/semantic.css' %}" rel="stylesheet" media="screen" title="no title" charset="UTF-8">
+</head>
+<body>
+    <div class="ui inverted fixed blue menu">
+      <div class="menu">
+          <a class="item" href="{% url 'mainindex' %}">首页 </a>
+          <a class="item" href="{% url 'noteindex' %}" >笔记 </a>
+          <a class="item" href="{% url 'projectindex' %}">项目 </a>
+          <a class="item" href="{% url 'messageindex' %}">留言板 </a>
+      </div>
+
+      <div class="right  vertical menu">
+            <div class="item">
+                  <div class="ui icon input">
+                        <input type="text" placeholder="Search notebook">
+                        <i class="search link icon"></i>
+                  </div>
+            </div>
+             {% if nowloginuser %}
+            <div  class="ui simple dropdown item"><i class="users icon"></i>{{ nowloginuser }} <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="#">普通用户</a>
+                    <a class="item" href="{% url 'loginout' %}">退出</a>
+                </div>
+            </div>
+              {% else %}
+            <a  class="ui item alt" href="{% url 'loginindex' %}"><i class="users icon"></i>普通用户入口</a>
+            {% endif %}
+            <a href="/admin" class="ui item alt" ><i class="user icon"></i>管理员入口</a>
+      </div>
+    </div>
+</body>
+</html>

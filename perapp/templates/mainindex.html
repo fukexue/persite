@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link>
+    <title>首页</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}"  media="screen" title="no title" charset="UTF-8"/>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/semantic.min.js' %}"></script>
+</head>
+<body>
+    <div class="ui inverted fixed blue menu">
+      <div class="menu">
+          <a class="item" href="{% url 'mainindex' %}">首页 </a>
+          <a class="item" href="{% url 'noteindex' %}" >笔记 </a>
+          <a class="item" href="{% url 'projectindex' %}">项目 </a>
+          <a class="item" href="{% url 'messageindex' %}">留言板 </a>
+      </div>
+
+      <div class="right  vertical menu">
+            <div class="item">
+                  <div class="ui icon input">
+                        <input type="text" placeholder="Search notebook">
+                        <i class="search link icon"></i>
+                  </div>
+            </div>
+             {% if nowloginuser %}
+            <div  class="ui simple dropdown item"><i class="users icon"></i>{{ nowloginuser }} <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="#">普通用户</a>
+                    <a class="item" href="{% url 'loginout' %}">退出</a>
+                </div>
+            </div>
+              {% else %}
+            <a  class="ui item alt" href="{% url 'loginindex' %}"><i class="users icon"></i>普通用户入口</a>
+            {% endif %}
+            <a href="/admin" class="ui item alt" ><i class="user icon"></i>管理员入口</a>
+      </div>
+    </div>
+    <div class="ui inverted blue secondary vertical basic segment">
+        <img class="ui mini images" src="{% static 'images/mainindex1.jpg' %}">
+    </div>
+    <div class="ui inverted blue secondary vertical basic  segment">
+        <div class="ui grid">
+            <div class="one wide column"></div>
+            <div class="three wide column">
+                <div class="ui card">
+                  <div class="image">
+                    <img src="{% static 'images/fukexuephoto.jpg' %}">
+                  </div>
+                  <div class="content">
+                    <a class="header">{{ personalabstract.Pername }}</a>
+                    <div class="meta">
+                      <span class="date">borned in 1995</span>
+                    </div>
+                    <div class="description">
+                      本科期间主修电子信息工程专业的相关知识，研究生阶段从事人工智能与医学图像处理方向的研究。
+                    </div>
+                  </div>
+{#                  <div class="extra content">#}
+{#                    <a>#}
+{#                      <i class="user icon"></i>#}
+{#                      22 Friends#}
+{#                    </a>#}
+{#                  </div>#}
+                </div>
+            </div>
+            <div class="twelve wide column">
+                <div class="ui message">
+                <a class="ui olive right ribbon label">
+                  <i class="mail icon"></i>
+                  Mail
+                </a>
+                  <div class="header">
+                    <i class="user icon"></i>
+                    个人简介
+                  </div>
+                  <p>{{ personalabstract.Perabstract }}</p>
+                </div>
+                <div class="ui message">
+                  <div class="header">
+                    <i class="book icon"></i>
+                    最新笔记
+                  </div>
+                  <div class="ui message">
+                      <div class="header">
+                        <i class=" mini star icon"></i>
+                        <a href="#">{{ olinenote.headline }}</a>
+                        <i class="mini calendar icon"></i>
+                          {{ olinenote.textdata }}
+                      </div>
+                      <p>{{ olinenote.mainbody | truncatewords:"1" }}</p>
+                  </div>
+                </div>
+                <div class="ui message">
+                  <div class="header">
+                    <i class="calculator icon"></i>
+                   最近项目
+                  </div>
+                  <div class="ui message">
+                      <div class="header">
+                        <i class=" mini tasks icon"></i>
+                        <a href="#">{{ olineproject.headline }}</a>
+                        <i class="mini calendar icon"></i>
+                          {{ olineproject.textdata }}
+                      </div>
+                      <p>{{ olineproject.projectabstract | truncatewords:"10" }}</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical secondary borderless segment">
+        <div class="ui container">
+            <p>傅科学的个人小站，记录一些平时的学习笔记和个人学习心得</p>
+            <div class="menu">
+                <div class="item">
+                    Email:fukexue@whut.edu.cn
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>

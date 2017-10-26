@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple login form</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen" title="no title" charset="UTF-8"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" media="screen" title="no title" charset="UTF-8"/>
+</head>
+
+<body>
+  <div class="container">
+  <div class="login">
+      {% if registerflag == 1 %}
+        <h1 class="login-heading">
+        <strong>Register.</strong> sucess.Please login.</h1>
+      {% else %}
+  	    <h1 class="login-heading">
+        <strong>Welcome.</strong> Please login.</h1>
+      {% endif %}
+      <form action="/loginresult/" method="post">
+          {% csrf_token %}
+        <input type="text" name="user" placeholder="Username" required="required" class="input-txt" />
+          <input type="password" name="password" placeholder="Password" required="required" class="input-txt" />
+          <div class="login-footer">
+            <button type="submit" class="btn btn--right">Sign in  </button>
+          </div>
+          <a class="menu" href="{% url 'registerindex' %}">
+              <h4>还没有账号去注册</h4>
+          </a>
+      </form>
+  </div>
+</div>
+
+    <script  src="{% static 'js/index.js' %}"></script>
+
+</body>
+</html>
